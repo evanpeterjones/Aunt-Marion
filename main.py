@@ -1,4 +1,4 @@
-
+'''
 import wave, struct, math, random
 from struct import pack
 from math import pi, sin
@@ -27,3 +27,18 @@ def sound_generation(name, freq, dur, vol):
     a.close()
 
 sound_generation("test.wav", 440, 1, 1)
+'''
+import numpy as np
+import wavio
+
+# Parameters
+rate = 44100    # samples per second
+T = 3           # sample duration (seconds)
+f = 440.0       # sound frequency (Hz)
+
+# Compute waveform samples
+t = np.linspace(0, T, T*rate, endpoint=False)
+x = np.sin(2*np.pi * f * t)
+
+# Write the samples to a file
+wavio.write("sine.wav", x, rate, sampwidth=3)
